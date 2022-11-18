@@ -11,6 +11,17 @@
 #include <WNT_Window.hxx>
 #elif defined(__APPLE__) && !defined(MACOSX_USE_GLX)
 #include <Cocoa_Window.hxx>
+#else
+#undef Bool
+#undef CursorShape
+#undef None
+#undef KeyPress
+#undef KeyRelease
+#undef FocusIn
+#undef FocusOut
+#undef FontChange
+#undef Expose
+#include <Xw_Window.hxx>
 #endif
 
 static Handle(Graphic3d_GraphicDriver)& GetGraphicDriver() {
@@ -47,6 +58,8 @@ void OCCView::init() {
     Handle(WNT_Window) wind = new WNT_Window((Aspect_Handle) window_handle);
 #elif defined(__APPLE__) && !defined(MACOSX_USE_GLX)
     Handle(Cocoa_Window) wind = new Cocoa_Window((NSView*) window_handle);
+#else
+    Handle(Xw_Window) wind = new Xw_Window(aDisplayConnection,window_handle);
 #endif
 
     m_v3dviewer = new V3d_Viewer(GetGraphicDriver());
@@ -63,7 +76,7 @@ void OCCView::init() {
 
     m_v3dview->SetBackgroundColor(Quantity_NOC_BLACK);
     m_v3dview->MustBeResized();
-    m_v3dview->TriedronDisplay(Aspect_TOTP_LEFT_LOWER,Quantity_NOC_GOLD,0.08,V3d_ZBUFFER);
+    //m_v3dview->TriedronDisplay(Aspect_TOTP_LEFT_LOWER,Quantity_NOC_GOLD,0.08,V3d_ZBUFFER);
 
     m_Context->SetDisplayMode(AIS_Shaded,Standard_True);
 
@@ -90,10 +103,7 @@ void OCCView::resizeEvent(QResizeEvent* ev) {
 void OCCView::fitAll() {
     m_v3dview->FitAll();
     m_v3dview->ZFitAll();
-    //m_v3dview->AutoZFit();
     m_v3dview->Redraw();
-
-    //m_v3dview->SetEye(0,20.0,-10);
 }
 
 
