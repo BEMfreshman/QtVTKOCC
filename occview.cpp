@@ -1,6 +1,5 @@
 #include <OpenGl_GraphicDriver.hxx>
 #include "occview.h"
-#include "occwin.h"
 #include <QStyleFactory>
 #include <V3d_View.hxx>
 
@@ -82,7 +81,7 @@ void OCCView::paintEvent(QPaintEvent *ev) {
 }
 
 void OCCView::resizeEvent(QResizeEvent* ev) {
-    if (m_v3dview.IsNull()) {
+    if (!m_v3dview.IsNull()) {
         m_v3dview->MustBeResized();
     }
 }

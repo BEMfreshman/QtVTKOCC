@@ -29,9 +29,9 @@ set(PROJECT_SOURCES
         main.cpp
         mainwindow.cpp
         mainwindow.h
-        mainwindow.ui
-        occview.h occview.cpp
-        occwin.cpp occwin.h)
+        occQt.ui
+        occqt.qrc
+        occview.h occview.cpp)
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(QtVTKOCC
