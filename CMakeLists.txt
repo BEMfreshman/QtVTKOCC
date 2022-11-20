@@ -28,14 +28,18 @@ find_package(OpenCASCADE)
 if (NOT OpenCASCADE_FOUND)
     message(FATAL_error "OpenCASCADE is not found")
 endif()
-
 include_directories(${OpenCASCADE_INCLUDE_DIR})
+
+
+find_package(Eigen3)
+include_directories(${EIGEN3_INCLUDE_DIR})
 
 set(SOURCES
         main.cpp
         mainwindow.cpp
         mainwindow.h
-        occview.h occview.cpp)
+        mainwindow.ui
+        occview.h occview.cpp occdocument.cpp occdocument.h)
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         qt_add_executable(QTViewBDF

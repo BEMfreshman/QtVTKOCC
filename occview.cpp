@@ -6,6 +6,8 @@
 #include <Aspect_Handle.hxx>
 #include <Aspect_DisplayConnection.hxx>
 
+#include "occdocument.h"
+
 #ifdef WNT
 #include <WNT_Window.hxx>
 #elif defined(__APPLE__) && !defined(MACOSX_USE_GLX)
@@ -79,6 +81,7 @@ void OCCView::init() {
 
     m_Context->SetDisplayMode(AIS_Shaded,Standard_True);
 
+    m_OCCDoc = make_shared<OCCDocument>();
 }
 
 const Handle(AIS_InteractiveContext)& OCCView::getContext() const {
@@ -103,6 +106,10 @@ void OCCView::fitAll() {
     m_v3dview->FitAll();
     m_v3dview->ZFitAll();
     m_v3dview->Redraw();
+}
+
+void OCCView::load(const string &filePath, const string &fileName) {
+    m_OCCDoc->load(filePath,fileName);
 }
 
 

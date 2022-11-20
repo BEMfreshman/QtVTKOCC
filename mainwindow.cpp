@@ -1,3 +1,5 @@
+#include <QFileDialog>
+
 #include "mainwindow.h"
 
 #include "occview.h"
@@ -26,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent)
     setCentralWidget(m_OCCView);
 
     //makeBox();
-    makeSphere();
+    //makeSphere();
 
     m_OCCView->fitAll();
 }
@@ -55,5 +57,39 @@ void MainWindow::makeSphere() {
     anAisSphere->SetColor(Quantity_NOC_BLUE1);
 
     m_OCCView->getContext()->Display(anAisSphere, Standard_True);
+}
+
+
+void MainWindow::on_actionOpen_triggered()
+{
+    QFileDialog* fileDialog = new QFileDialog(this);
+
+    fileDialog->setWindowTitle(QStringLiteral("Open BDF file"));
+    fileDialog->setNameFilter(tr("File(*.bdf* *.fem* *.dat* *.nas*)"));
+    fileDialog->setFileMode(QFileDialog::ExistingFiles);
+
+    fileDialog->setViewMode(QFileDialog::Detail);
+
+    QStringList  filenames;
+
+    if (fileDialog->exec()) {
+        filenames = fileDialog->selectedFiles();
+    }
+
+    //qDebug() << filenames;
+
+    QString fullpath = filenames.at(0);
+
+    QFileInfo fileInfo = QFileInfo(fullpath);
+    QString fileName = fileInfo.fileName();
+    QString filePath = fileInfo.absolutePath();
+
+    m_OCCView->load(filePath.toStdString(),fileName.toStdString());
+}
+
+
+void MainWindow::on_actionExit_triggered()
+{
+
 }
 
