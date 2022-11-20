@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 
 #include "occview.h"
+#include "ui_mainwindow.h"
 
 #include <QDockWidget>
 
@@ -15,9 +16,10 @@
 #include <AIS_Shape.hxx>
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
+    : QMainWindow(parent),
+    ui(new Ui::MainWindow)
 {
-    ui.setupUi(this);
+    ui->setupUi(this);
 
     m_OCCView = new OCCView(this);
 
@@ -31,7 +33,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-    // delete ui;
+     delete ui;
 }
 
 void MainWindow::makeBox() {

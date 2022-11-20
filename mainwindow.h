@@ -2,7 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "ui_occQt.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -23,7 +22,7 @@ private:
     void makeSphere();
 
 private:
-    Ui::occQtClass ui;;
+    Ui::MainWindow* ui;;
 
     OCCView* m_OCCView;
 };
