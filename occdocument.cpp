@@ -7,11 +7,12 @@
 #include "AbstractFileReader.h"
 #include "NASTRANFileReader.h"
 #include "FEMInfo.h"
+#include "PrimitiveInfo.h"
 
 #include "VUKernelLog.h"
 
 OCCDocument::OCCDocument() :
-    m_reader(nullptr),m_feminfo(nullptr)
+    m_reader(nullptr),m_feminfo(nullptr),m_priinfo(nullptr)
 {
 
 }
@@ -38,6 +39,7 @@ int OCCDocument::load(const string &filepath, const string &filename) {
     }
 
     m_feminfo = new MK::FEMInfo(m_reader);
+    m_priinfo = new PI::PrimitiveInfo(m_feminfo);
 
     return 0;
 }
@@ -45,4 +47,5 @@ int OCCDocument::load(const string &filepath, const string &filename) {
 void OCCDocument::clear() {
     delete m_reader;
     delete m_feminfo;
+    delete m_priinfo;
 }

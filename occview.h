@@ -1,31 +1,34 @@
 #ifndef OCCVIEW_H
 #define OCCVIEW_H
 
-#include <QWidget>
-#include <AIS_InteractiveContext.hxx>
-#include <memory>
+#include <QVTKOpenGLWidget.h>
 
-#include <string>
+#include <vtkRenderer.h>
+#include <vtkRenderWindow.h>
+#include <vtkDataSetMapper.h>
+#include <vtkActor.h>
+#include <vtkNamedColors.h>
+
+//#include <AIS_InteractiveContext.hxx>
 
 using std::string;
-using std::shared_ptr;
-using std::make_shared;
 class OCCDocument;
 
-class OCCView : public QWidget
+class OCCView : public QVTKOpenGLWidget
 {
     Q_OBJECT
 public:
-    explicit OCCView(QWidget *parent = nullptr);
-    ~OCCView() override = default;
+    explicit OCCView(QVTKOpenGLWidget *parent = nullptr);
+    ~OCCView() override;
 
-    [[nodiscard]] const Handle(AIS_InteractiveContext)& getContext() const;
+    //[[nodiscard]] const Handle(AIS_InteractiveContext)& getContext() const;
 
-public:
+    virtual QSize minimumSizeHint() const override;
+
+public slots:
     void load(const string& filePath, const string& fileName) ;
 
-
-    void fitAll(void);
+    void fitall(void);
 
 protected:
     [[nodiscard]] QPaintEngine* paintEngine() const override;
@@ -38,14 +41,24 @@ protected:
 
 protected:
     void init(void);
+    void updateViewer();
 
 private:
-    Handle(V3d_Viewer) m_v3dviewer;
-    Handle(V3d_View)   m_v3dview;
-    Handle(AIS_InteractiveContext) m_Context;
+    // Handle(V3d_Viewer) m_v3dviewer;
+    // Handle(V3d_View)   m_v3dview;
+    // Handle(AIS_InteractiveContext) m_Context;
 
-    shared_ptr<OCCDocument> m_OCCDoc;
-signals:
+    OCCDocument* m_OCCDoc;
+
+private:
+    vtkNew<vtkNamedColors> m_colors;
+    vtkNew<vtkRenderer> m_renderer;
+    vtkNew<vtkRenderWindow> m_renderwin;
+    vtkNew<vtkRenderWindowInteractor> m_iren;
+
+    vtkNew<vtkActor> m_ugridActor;
+private:
+    vtkNew<vtkDataSetMapper> m_ugridMapper;
 
 };
 

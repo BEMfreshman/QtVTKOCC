@@ -17,9 +17,8 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets OpenGLWidgets OpenGL)
+find_package(QT NAMES Qt5 REQUIRED COMPONENTS Widgets OpenGL)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets
-    OpenGLWidgets
     OpenGL)
 find_package(VTK)
 find_package(OpenCASCADE)
@@ -53,8 +52,8 @@ else()
 endif()
 
 target_link_libraries(QTViewBDF PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
-            Qt${QT_VERSION_MAJOR}::OpenGLWidgets
             Qt${QT_VERSION_MAJOR}::OpenGL
+            ${VTK_LIBRARIES}
             ${OpenCASCADE_LIBRARIES} Reader)
 
 if(QT_VERSION_MAJOR EQUAL 6)

@@ -1,4 +1,6 @@
 Reader
 .idea
+.code
+build
 cmake-build-debug
 CMakeLists_oldqt.txt

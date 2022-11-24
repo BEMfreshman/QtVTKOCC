@@ -8,13 +8,15 @@
 // document for OCC to manage data on backend
 #include <string>
 #include <QString>
-#include <memory>
-using std::shared_ptr;
-using std::string;
+
 
 namespace MK {
     class AbstractFileReader;
     class FEMInfo;
+}
+
+namespace PI {
+    class PrimitiveInfo;
 }
 
 class OCCDocument {
@@ -26,6 +28,9 @@ public:
 
     int load(const string& filepath, const string& filename);
 
+    PI::PrimitiveInfo* getpriinfo()  {return m_priinfo;};
+
+    const PI::PrimitiveInfo* getpriinfo() const {return m_priinfo;}
 protected:
 
     void clear();
@@ -36,6 +41,7 @@ protected:
 
     MK::AbstractFileReader* m_reader;
     MK::FEMInfo* m_feminfo;
+    PI::PrimitiveInfo* m_priinfo;
 };
 
 

@@ -23,8 +23,8 @@ private slots:
     void on_actionExit_triggered();
 
 private:
-    void makeBox();
-    void makeSphere();
+    // void makeBox();
+    // void makeSphere();
 
 private:
     Ui::MainWindow* ui;;
