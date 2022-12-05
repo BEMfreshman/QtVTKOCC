@@ -7,6 +7,8 @@
 //#include <Aspect_DisplayConnection.hxx>
 
 #include <vtkRenderWindowInteractor.h>
+#include <vtkUnstructuredGrid.h>
+#include <vtkProperty.h>
 
 #include "occdocument.h"
 #include "PrimitiveInfo.h"

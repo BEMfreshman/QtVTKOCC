@@ -7,8 +7,7 @@
 
 // document for OCC to manage data on backend
 #include <string>
-#include <QString>
-
+using std::string;
 
 namespace MK {
     class AbstractFileReader;

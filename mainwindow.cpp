@@ -23,14 +23,14 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    m_OCCView = new OCCView(this);
+    //m_OCCView = new OCCView(this);
 
-    setCentralWidget(m_OCCView);
+    //setCentralWidget(m_OCCView);
 
     //makeBox();
     //makeSphere();
 
-    m_OCCView->fitAll();
+    //m_OCCView->fitAll();
 }
 
 MainWindow::~MainWindow()

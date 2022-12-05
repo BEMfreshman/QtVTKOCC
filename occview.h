@@ -23,18 +23,18 @@ public:
 
     //[[nodiscard]] const Handle(AIS_InteractiveContext)& getContext() const;
 
-    virtual QSize minimumSizeHint() const override;
+    //virtual QSize minimumSizeHint() const override;
 
 public slots:
     void load(const string& filePath, const string& fileName) ;
 
-    void fitall(void);
+    //void fitall(void);
 
 protected:
-    [[nodiscard]] QPaintEngine* paintEngine() const override;
+    //[[nodiscard]] QPaintEngine* paintEngine() const override;
 
-    void paintEvent(QPaintEvent* ev) override;
-    void resizeEvent(QResizeEvent* ev) override;
+    //void paintEvent(QPaintEvent* ev) override;
+    //void resizeEvent(QResizeEvent* ev) override;
 
     // mouse event
     //virtual void mousePressEvent(QMouseEvent* ev) override;
