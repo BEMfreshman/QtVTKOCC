@@ -16,7 +16,7 @@
 #ifdef WNT
 #include <WNT_Window.hxx>
 #elif defined(__APPLE__) && !defined(MACOSX_USE_GLX)
-#include <Cocoa_Window.hxx>
+//#include <Cocoa_Window.hxx>
 #else
 #undef Bool
 #undef CursorShape
@@ -36,7 +36,7 @@
 // }
 
 OCCView::OCCView(QVTKOpenGLWidget *parent)
-    : QVTKOpenGLWidget{parent},m_OCCDoc(nullptr)
+    : QVTKOpenGLWidget{parent},m_OCCDoc(new OCCDocument())
 {
     // setBackgroundRole(QPalette::NoRole);
 
@@ -46,9 +46,7 @@ OCCView::OCCView(QVTKOpenGLWidget *parent)
 
     // setMouseTracking(true);
 
-    //init();
-
-    m_OCCDoc = new OCCDocument();
+    init();
 }
 
 OCCView::~OCCView() {
@@ -115,8 +113,16 @@ OCCView::~OCCView() {
 
 
 void OCCView::init() {
-    m_renderwin->AddRenderer(m_renderer);
-    m_iren->SetRenderWindow(m_renderwin);
+
+    m_colors = vtkSmartPointer<vtkNamedColors>::New();
+    m_renderer = vtkSmartPointer<vtkRenderer>::New();
+    m_renderwin = vtkSmartPointer<vtkRenderWindow>::New();
+    m_iren = vtkSmartPointer<vtkRenderWindowInteractor>::New();
+    m_ugridActor = vtkSmartPointer<vtkActor>::New();
+    m_ugridMapper =  vtkSmartPointer<vtkDataSetMapper>::New();
+
+//    m_renderwin->AddRenderer(m_renderer);
+//    m_iren->SetRenderWindow(m_renderwin);
 }
 
 //void OCCView::fitall() {

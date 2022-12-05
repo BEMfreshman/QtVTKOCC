@@ -6,6 +6,8 @@
 #include "ui_mainwindow.h"
 
 #include <QDockWidget>
+#include <QMessageBox>
+#include <QDebug>
 
 // #include <TopoDS.hxx>
 // #include <TopExp.hxx>
@@ -17,11 +19,16 @@
 
 // #include <AIS_Shape.hxx>
 
+#include <QLayout>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    m_OCCView(new OCCView())
 {
     ui->setupUi(this);
+
+    setCentralWidget(m_OCCView);
 
     //m_OCCView = new OCCView(this);
 
@@ -36,6 +43,7 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
      delete ui;
+     delete m_OCCView;
 }
 
 // void MainWindow::makeBox() {
@@ -78,6 +86,8 @@ void MainWindow::on_actionOpen_triggered()
 
     //qDebug() << filenames;
 
+    if (filenames.isEmpty()) return;
+
     QString fullpath = filenames.at(0);
 
     QFileInfo fileInfo = QFileInfo(fullpath);
@@ -90,6 +100,12 @@ void MainWindow::on_actionOpen_triggered()
 
 void MainWindow::on_actionExit_triggered()
 {
+    close();
+}
 
+
+void MainWindow::on_actionSave_triggered()
+{
+    qDebug() << "Save this";
 }
 

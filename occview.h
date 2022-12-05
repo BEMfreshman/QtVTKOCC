@@ -51,14 +51,14 @@ private:
     OCCDocument* m_OCCDoc;
 
 private:
-    vtkNew<vtkNamedColors> m_colors;
-    vtkNew<vtkRenderer> m_renderer;
-    vtkNew<vtkRenderWindow> m_renderwin;
-    vtkNew<vtkRenderWindowInteractor> m_iren;
+    vtkSmartPointer<vtkNamedColors> m_colors;
+    vtkSmartPointer<vtkRenderer> m_renderer;
+    vtkSmartPointer<vtkRenderWindow> m_renderwin;
+    vtkSmartPointer<vtkRenderWindowInteractor> m_iren;
 
-    vtkNew<vtkActor> m_ugridActor;
+    vtkSmartPointer<vtkActor> m_ugridActor;
 private:
-    vtkNew<vtkDataSetMapper> m_ugridMapper;
+    vtkSmartPointer<vtkDataSetMapper> m_ugridMapper;
 
 };
 

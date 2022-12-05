@@ -17,17 +17,22 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
+set(QT_DIR /usr/local/Cellar/qt@5/5.15.7/lib/cmake/Qt5)
+set(Qt5_DIR /usr/local/Cellar/qt@5/5.15.7/lib/cmake/Qt5)
+
 find_package(QT NAMES Qt5 REQUIRED COMPONENTS Widgets OpenGL)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets
     OpenGL)
-find_package(VTK)
-find_package(OpenCASCADE)
 
-find_package(OpenCASCADE)
-if (NOT OpenCASCADE_FOUND)
-    message(FATAL_error "OpenCASCADE is not found")
-endif()
-include_directories(${OpenCASCADE_INCLUDE_DIR})
+set(VTK_DIR /usr/local/Cellar/vtk@8.2/8.2.0_9/lib/cmake/vtk-8.2)
+find_package(VTK)
+#find_package(OpenCASCADE)
+#
+#find_package(OpenCASCADE)
+#if (NOT OpenCASCADE_FOUND)
+#    message(FATAL_error "OpenCASCADE is not found")
+#endif()
+#include_directories(${OpenCASCADE_INCLUDE_DIR})
 
 
 find_package(Eigen3)
@@ -54,7 +59,8 @@ endif()
 target_link_libraries(QTViewBDF PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
             Qt${QT_VERSION_MAJOR}::OpenGL
             ${VTK_LIBRARIES}
-            ${OpenCASCADE_LIBRARIES} Reader)
+#           ${OpenCASCADE_LIBRARIES}
+            Reader)
 
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(QTViewBDF)

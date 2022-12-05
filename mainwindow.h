@@ -22,6 +22,8 @@ private slots:
 
     void on_actionExit_triggered();
 
+    void on_actionSave_triggered();
+
 private:
     // void makeBox();
     // void makeSphere();
